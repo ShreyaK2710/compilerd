@@ -51,6 +51,13 @@ const LANGUAGES_CONFIG = {
     [PROMPTV2]: {
         model: 'gpt-3.5-turbo-1106',
     },
+    [PHP]: {
+        compile: '',
+        run: 'php solution.php',
+        timeout: 10,
+        filename: 'solution.php',
+        memory: ALLOWED_RAM * ONE_MB,
+    },
 }
 
 module.exports = { LANGUAGES_CONFIG }
