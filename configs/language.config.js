@@ -1,4 +1,7 @@
-const { CPP, C, PYTHON, JAVA, NODEJS, RUBY, PROMPTV1, PROMPTV2 } = require('../enums/supportedLanguages')
+const { compile } = require('joi')
+const { CPP, C, PYTHON, JAVA, NODEJS, RUBY, PROMPTV1, PROMPTV2, RUST } = require('../enums/supportedLanguages')
+const { run } = require('jest')
+const { timeout } = require('puppeteer')
 const ONE_MB = 1024 // ulimit uses Kilobyte as base unit
 const ALLOWED_RAM = process.env.ALLOWED_RAM || 512
 
@@ -50,6 +53,13 @@ const LANGUAGES_CONFIG = {
     },
     [PROMPTV2]: {
         model: 'gpt-3.5-turbo-1106',
+    },
+    [RUST]: {
+        compile: 'rustc main.rs',
+        run: './main', // Adjust this path if necessary
+        timeout: 10,
+        filename: 'main.rs',
+        memory: ALLOWED_RAM * ONE_MB,
     },
 }
 
